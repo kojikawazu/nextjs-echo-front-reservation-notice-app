@@ -38,4 +38,4 @@
 
 ## URL
 
-![vercel.com](https://vercel.com/)
+[vercel.com](https://vercel.com/)
