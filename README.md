@@ -17,6 +17,7 @@
   - Echo
   - Go
   - WebSocket
+  - Redis Pub/Sub
 - DB
   - Supabase
 - Container
