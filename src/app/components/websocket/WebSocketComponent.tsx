@@ -7,6 +7,8 @@ import { useState, useEffect, useRef } from 'react';
  * @returns JSX
  */
 const WebSocketComponent = () => {
+   // 環境変数からWebSocketのURLを取得
+   const WS_URL = process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:8080/ws'; // デフォルトURLを設定
   // ユーザーが送信するメッセージを保持するステート
   const [message, setMessage] = useState('');
   // サーバーから受信したメッセージを保持するステート
@@ -18,7 +20,7 @@ const WebSocketComponent = () => {
 
   // WebSocketの初期化と再接続処理
   const initWebSocket = () => {
-    const ws = new WebSocket('ws://localhost:8080/ws');
+    const ws = new WebSocket(WS_URL);
     wsRef.current = ws;
 
     // WebSocket接続が確立したときに呼ばれる
