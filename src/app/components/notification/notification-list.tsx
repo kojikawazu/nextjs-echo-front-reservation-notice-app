@@ -9,8 +9,12 @@ import { NotificationData, NotificationWebsocketData } from '@/app/types/types';
  * @returns JSX
  */
 const NotificationList = () => {
+    // 通知を保持するステート
     const [notifications, setNotifications] = useState<string[]>([]);
+    // WebSocketの参照。再接続時やクローズ処理に使用
     const wsRef = useRef<WebSocket | null>(null);
+    // 再接続のためのタイマーを保持
+    const reconnectInterval = useRef<NodeJS.Timeout | null>(null);
 
     // WebSocketの初期化
     const initWebSocket = () => {
@@ -19,6 +23,12 @@ const NotificationList = () => {
 
         ws.onopen = () => {
             console.log('WebSocket opened');
+
+            // 再接続のタイマーが動作していればクリアする
+            if (reconnectInterval.current) {
+                clearInterval(reconnectInterval.current);
+                reconnectInterval.current = null;
+            }
         };
 
         ws.onmessage = (event: MessageEvent) => {
@@ -31,6 +41,11 @@ const NotificationList = () => {
 
         ws.onclose = () => {
             console.log('WebSocket closed');
+
+            // 再接続処理を開始
+            if (!reconnectInterval.current) {
+                reconnectInterval.current = setInterval(initWebSocket, 5000); // 5秒後に再接続
+            }
         };
 
         ws.onerror = (error) => {
@@ -60,6 +75,9 @@ const NotificationList = () => {
         return () => {
             if (wsRef.current) {
                 wsRef.current.close();
+            }
+            if (reconnectInterval.current) {
+                clearInterval(reconnectInterval.current);
             }
         };
     }, []);
