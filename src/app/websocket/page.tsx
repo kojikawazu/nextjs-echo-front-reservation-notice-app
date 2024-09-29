@@ -1,6 +1,10 @@
 import WebSocketComponent from "../components/websocket/WebSocketComponent";
 
-const Home = () => {
+/**
+ * WebSocketPage
+ * @returns JSX
+ */
+const WebSocketPage = () => {
   return (
     <div>
       <WebSocketComponent />
@@ -8,4 +12,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default WebSocketPage;
