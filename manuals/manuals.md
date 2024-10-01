@@ -35,3 +35,9 @@ module.exports = {
 @tailwind components;
 @tailwind utilities;
 ```
+
+## テストコード導入
+
+```bash
+npm install --save-dev jest @testing-library/react @testing-library/jest-dom jest-environment-jsdom ts-jest @types/jest @types/testing-library__react
+```
