@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import LogoutButton from '@/app/components/user/logout';
+import LogoutButton from '@/app/components/user/logout-btn';
 
 interface HeaderProps {
     username: string;
