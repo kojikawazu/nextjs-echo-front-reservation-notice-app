@@ -37,6 +37,10 @@
     - Internet Gateway
     - Secret Manager
 
+## Architecture
+
+![Architecture](./diagrams/frontend.drawio.png)
+
 ## URL
 
 [vercel.com](https://vercel.com/)
