@@ -1,4 +1,4 @@
-import WebSocketComponent from "../components/websocket/WebSocketComponent";
+import WebSocketComponent from "../components/websocket/websocket-component";
 
 /**
  * WebSocketPage

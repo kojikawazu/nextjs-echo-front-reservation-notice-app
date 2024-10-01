@@ -8,10 +8,11 @@ import axios from 'axios';
 interface AuthContextType {
   isAuthenticated: boolean;
   loading: boolean;
+  username: string | null;
 }
 
 // 認証状態のコンテキスト
-const AuthContext = createContext<AuthContextType>({ isAuthenticated: false, loading: true });
+const AuthContext = createContext<AuthContextType>({ isAuthenticated: false, loading: true, username: null });
 
 // useAuth カスタムフック
 export const useAuth = () => useContext(AuthContext);
@@ -25,6 +26,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const loginPath = '/user/login';
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [username, setUsername] = useState<string | null>(null);
     const router = useRouter();
     const pathname = usePathname();
 
@@ -42,13 +44,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
                 if (response.status === 200) {
                     setIsAuthenticated(true);
+                    setUsername(response.data.username);
                 } else {
                     setIsAuthenticated(false);
+                    setUsername(null);
                     router.push(loginPath);
                 }
             } catch (error) {
                 console.log('Authentication check failed:', error);
                 setIsAuthenticated(false);
+                setUsername(null);
                 router.push(loginPath);
             } finally {
                 setLoading(false);
@@ -59,7 +64,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }, [router, pathname]);
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, loading }}>
+        <AuthContext.Provider value={{ isAuthenticated, loading, username }}>
             {loading ? <div>Loading...</div> : children}
         </AuthContext.Provider>
     );

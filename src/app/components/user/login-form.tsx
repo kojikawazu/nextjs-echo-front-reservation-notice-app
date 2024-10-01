@@ -44,7 +44,7 @@ const LoginForm = () => {
 
             if (response.status === 200) {
                 // ログイン成功時、ホームページにリダイレクト
-                router.push('/');
+                router.push('/reservation');
             } else {
                 setErrorMessage('ログインに失敗しました。もう一度お試しください。');
             }
