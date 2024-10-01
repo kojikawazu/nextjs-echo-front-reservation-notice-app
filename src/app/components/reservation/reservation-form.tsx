@@ -9,7 +9,6 @@ import axios from 'axios';
  */
 const ReservertionForm = () => {
     const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
-    const userId = process.env.NEXT_PUBLIC_USER_ID || ''; // ログインユーザは未実装。その為、ユーザIDは環境変数から取得
 
     const [reservationDate, setReservationDate] = useState(''); // 予約日
     const [numPeople, setNumPeople] = useState(1); // 人数
@@ -19,11 +18,6 @@ const ReservertionForm = () => {
 
     // フォーム送信ハンドラー
     const handleSubmit = async () => {
-        if (!userId) {
-            setMessage('ユーザーIDが指定されていません。環境変数を確認してください。');
-            return;
-        }
-
         try {
             // 予約日をGoで対応できるフォーマットに変換
             // "YYYY-MM-DDTHH:MM" -> "YYYY-MM-DD HH:MM:SS"
@@ -31,11 +25,12 @@ const ReservertionForm = () => {
 
             // サーバーにPOSTリクエストを送信
             await axios.post(`${API_URL}/api/reservation`, {
-                user_id: userId,
                 reservation_date: formattedDate,
                 num_people: numPeople,
                 special_request: specialRequest,
                 status,
+            }, {
+                withCredentials: true,
             });
             setMessage('予約が正常に作成されました');
         } catch (error) {
