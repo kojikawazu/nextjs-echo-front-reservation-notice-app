@@ -36,6 +36,17 @@ module.exports = {
 @tailwind utilities;
 ```
 
+## ESLintとFormatterの導入
+
+```bash
+npm install --save-dev prettier eslint-config-prettier eslint-plugin-prettier
+```
+
+以下を追加すること
+
+-   .eslintrc.json
+-   .prettierrc
+
 ## テストコード導入
 
 ```bash
@@ -47,16 +58,23 @@ npm install --save-dev jest @testing-library/react @testing-library/jest-dom jes
 -   jest.config.cjs
 -   jest.setup.ts
 
-## ESLintとFormatterの導入
+## Playwrightのインストール
 
 ```bash
-npm install --save-dev prettier eslint-config-prettier eslint-plugin-prettier
+npm install -D playwright
+npm install --save-dev @playwright/test
+npx playwright install
+npx playwright test --config
 ```
 
 以下を追加すること
 
--   .eslintrc.json
--   .prettierrc
+-   playwright.config.ts
+
+```bash
+# テストの実行
+npx playwright test
+```
 
 ## 注意点
 

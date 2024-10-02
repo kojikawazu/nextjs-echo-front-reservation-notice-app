@@ -12,6 +12,7 @@ module.exports = {
         '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
         '^@/(.*)$': '<rootDir>/src/$1', // tsconfigのpathsに対応
     },
+    testPathIgnorePatterns: ['/node_modules/', '<rootDir>/test/e2e/'],
     extensionsToTreatAsEsm: ['.ts', '.tsx'], // TypeScriptファイルをESMとして扱う
     verbose: true, // 詳細なログ出力を有効化
 };
