@@ -11,6 +11,7 @@ import { ReservationData } from '@/app/types/types';
 const ReservationList = () => {
     const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
     const [reservations, setReservations] = useState<ReservationData[]>([]);
+    const [error, setError] = useState<string | null>(null);
 
     // 予約情報を取得するための関数
     const fetchReservations = async () => {
@@ -18,8 +19,10 @@ const ReservationList = () => {
             const response = await axios.get(`${API_URL}/api/reservations`);
             const data: ReservationData[] = response.data;
             setReservations(data);
+            setError(null);
         } catch (error) {
             console.error('予約情報の取得に失敗しました', error);
+            setError('予約情報の取得に失敗しました');
         }
     };
 
@@ -32,17 +35,21 @@ const ReservationList = () => {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen">
             <h1 className="text-3xl font-bold mb-4">予約リスト</h1>
-            <ul>
-                {reservations.map((reservation, index) => (
-                    <li key={index} className="border p-4 mb-4">
-                        <p>ユーザーID: ***</p>
-                        <p>予約日: {reservation.reservation_date}</p>
-                        <p>人数: {reservation.num_people}</p>
-                        <p>特別リクエスト: {reservation.special_request}</p>
-                        <p>ステータス: {reservation.status}</p>
-                    </li>
-                ))}
-            </ul>
+            {error ? (
+                <p className="text-red-500">{error}</p> // エラーメッセージを表示
+            ) : (
+                <ul>
+                    {reservations.map((reservation, index) => (
+                        <li key={index} className="border p-4 mb-4">
+                            <p>ユーザーID: ***</p>
+                            <p>予約日: {reservation.reservation_date}</p>
+                            <p>人数: {reservation.num_people}</p>
+                            <p>特別リクエスト: {reservation.special_request}</p>
+                            <p>ステータス: {reservation.status}</p>
+                        </li>
+                    ))}
+                </ul>
+            )}
         </div>
     );
 };
