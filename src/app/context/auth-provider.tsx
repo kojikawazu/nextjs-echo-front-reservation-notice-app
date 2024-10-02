@@ -50,8 +50,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 );
 
                 if (response.status === 200) {
-                    setIsAuthenticated(true);
-                    setUsername(response.data.username);
+                    if (response.data.username) {
+                        setIsAuthenticated(true);
+                        setUsername(response.data.username);
+                    } else {
+                        setIsAuthenticated(false);
+                        setUsername(null);
+                        router.push(loginPath);
+                    }
                 } else {
                     setIsAuthenticated(false);
                     setUsername(null);

@@ -20,25 +20,13 @@ const Header = ({ username }: HeaderProps) => {
                 <h1 className="text-white text-lg font-bold">予約システム</h1>
                 <ul className="flex space-x-4">
                     <li>
-                        <Link href="/reservation/form">
-                            <a className="text-white hover:underline">
-                                予約フォーム
-                            </a>
-                        </Link>
+                        <Link href="/reservation/form">予約フォーム</Link>
                     </li>
                     <li>
-                        <Link href="/reservation">
-                            <a className="text-white hover:underline">
-                                予約リスト
-                            </a>
-                        </Link>
+                        <Link href="/reservation">予約リスト</Link>
                     </li>
                     <li>
-                        <Link href="/notification">
-                            <a className="text-white hover:underline">
-                                予約通知リスト
-                            </a>
-                        </Link>
+                        <Link href="/notification">予約通知リスト</Link>
                     </li>
                     <li>
                         <span className="text-white">{username} さん</span>

@@ -3,7 +3,10 @@ module.exports = {
     testEnvironment: 'jsdom',
     setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'], // セットアップファイルをTypeScriptに変更
     transform: {
-        '^.+\\.tsx?$': ['ts-jest', { useESM: true }], // ts-jestの設定をtransformフィールドに移動
+        '^.+\\.tsx?$': [
+            'ts-jest',
+            { tsconfig: '<rootDir>/tsconfig.jest.json' },
+        ], // ts-jestの設定をtransformフィールドに移動
     },
     moduleNameMapper: {
         '\\.(css|less|scss|sass)$': 'identity-obj-proxy',

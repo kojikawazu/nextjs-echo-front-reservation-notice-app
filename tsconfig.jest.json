@@ -10,7 +10,7 @@
         "moduleResolution": "node",
         "resolveJsonModule": true,
         "isolatedModules": true,
-        "jsx": "preserve",
+        "jsx": "react-jsx", // Jest 専用で react-jsx を使用
         "incremental": true,
         "plugins": [
             {
