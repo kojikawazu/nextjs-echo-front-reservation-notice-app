@@ -1,4 +1,3 @@
-
 // 予約情報の型定義
 export interface ReservationData {
     user_id: string;

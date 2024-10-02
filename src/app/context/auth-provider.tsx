@@ -6,13 +6,17 @@ import axios from 'axios';
 
 // 認証状態を格納するコンテキスト
 interface AuthContextType {
-  isAuthenticated: boolean;
-  loading: boolean;
-  username: string | null;
+    isAuthenticated: boolean;
+    loading: boolean;
+    username: string | null;
 }
 
 // 認証状態のコンテキスト
-const AuthContext = createContext<AuthContextType>({ isAuthenticated: false, loading: true, username: null });
+const AuthContext = createContext<AuthContextType>({
+    isAuthenticated: false,
+    loading: true,
+    username: null,
+});
 
 // useAuth カスタムフック
 export const useAuth = () => useContext(AuthContext);
@@ -38,9 +42,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
         const checkAuth = async () => {
             try {
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/check`, {
-                    withCredentials: true,
-                });
+                const response = await axios.get(
+                    `${process.env.NEXT_PUBLIC_API_URL}/api/auth/check`,
+                    {
+                        withCredentials: true,
+                    }
+                );
 
                 if (response.status === 200) {
                     setIsAuthenticated(true);

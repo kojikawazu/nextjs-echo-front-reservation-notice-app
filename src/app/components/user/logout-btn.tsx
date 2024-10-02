@@ -12,9 +12,13 @@ const LogoutButton = () => {
     const router = useRouter();
     const handleLogout = async () => {
         try {
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/logout`, {}, {
-                withCredentials: true,
-            });
+            const response = await axios.post(
+                `${process.env.NEXT_PUBLIC_API_URL}/api/logout`,
+                {},
+                {
+                    withCredentials: true,
+                }
+            );
 
             if (response.status === 200) {
                 router.push('/user/login');
@@ -27,13 +31,10 @@ const LogoutButton = () => {
     };
 
     return (
-        <button
-            onClick={handleLogout}
-            className="text-white hover:underline"
-        >
+        <button onClick={handleLogout} className="text-white hover:underline">
             ログアウト
         </button>
     );
-}
+};
 
 export default LogoutButton;

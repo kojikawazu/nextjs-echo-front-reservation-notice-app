@@ -37,16 +37,22 @@ const LoginForm = () => {
 
         try {
             // APIにリクエストを送信
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/login`, {
-                email,
-                password,
-            }, { withCredentials: true });
+            const response = await axios.post(
+                `${process.env.NEXT_PUBLIC_API_URL}/api/login`,
+                {
+                    email,
+                    password,
+                },
+                { withCredentials: true }
+            );
 
             if (response.status === 200) {
                 // ログイン成功時、ホームページにリダイレクト
                 router.push('/reservation');
             } else {
-                setErrorMessage('ログインに失敗しました。もう一度お試しください。');
+                setErrorMessage(
+                    'ログインに失敗しました。もう一度お試しください。'
+                );
             }
         } catch (error) {
             console.log(error);
@@ -60,12 +66,19 @@ const LoginForm = () => {
                 <h2 className="text-2xl font-bold text-center">ログイン</h2>
 
                 {errorMessage && (
-                    <div className="text-red-500 text-center">{errorMessage}</div>
+                    <div className="text-red-500 text-center">
+                        {errorMessage}
+                    </div>
                 )}
 
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-700">メールアドレス</label>
+                        <label
+                            htmlFor="email"
+                            className="block text-sm font-medium text-gray-700"
+                        >
+                            メールアドレス
+                        </label>
                         <input
                             type="email"
                             id="email"
@@ -76,7 +89,12 @@ const LoginForm = () => {
                         />
                     </div>
                     <div>
-                        <label htmlFor="password" className="block text-sm font-medium text-gray-700">パスワード</label>
+                        <label
+                            htmlFor="password"
+                            className="block text-sm font-medium text-gray-700"
+                        >
+                            パスワード
+                        </label>
                         <input
                             type="password"
                             id="password"
@@ -96,6 +114,6 @@ const LoginForm = () => {
             </div>
         </div>
     );
-}
+};
 
 export default LoginForm;

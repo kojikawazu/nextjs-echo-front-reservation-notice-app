@@ -18,7 +18,9 @@ const NotificationList = () => {
 
     // WebSocketの初期化
     const initWebSocket = () => {
-        const ws = new WebSocket(`${process.env.NEXT_PUBLIC_WS_URL}/ws` || 'ws://localhost:8080/ws');
+        const ws = new WebSocket(
+            `${process.env.NEXT_PUBLIC_WS_URL}/ws` || 'ws://localhost:8080/ws'
+        );
         wsRef.current = ws;
 
         ws.onopen = () => {
@@ -33,7 +35,9 @@ const NotificationList = () => {
 
         ws.onmessage = (event: MessageEvent) => {
             console.log('WebSocket message:', event.data);
-            const messageData: NotificationWebsocketData = JSON.parse(event.data);
+            const messageData: NotificationWebsocketData = JSON.parse(
+                event.data
+            );
             if (messageData && messageData.content) {
                 setNotifications((prev) => [...prev, messageData.content]);
             }
@@ -57,9 +61,13 @@ const NotificationList = () => {
     // 過去の通知を取得
     const fetchNotifications = async () => {
         try {
-            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/notifications`);
+            const response = await axios.get(
+                `${process.env.NEXT_PUBLIC_API_URL}/api/notifications`
+            );
             const pastNotifications: NotificationData[] = response.data;
-            setNotifications(pastNotifications.map((notification) => notification.message));
+            setNotifications(
+                pastNotifications.map((notification) => notification.message)
+            );
         } catch (error) {
             console.error('Failed to fetch notifications:', error);
         }
@@ -80,6 +88,8 @@ const NotificationList = () => {
                 clearInterval(reconnectInterval.current);
             }
         };
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
@@ -87,13 +97,13 @@ const NotificationList = () => {
             <h1 className="text-3xl font-bold mb-4">通知リスト</h1>
             <ul>
                 {notifications.map((notification, index) => (
-                <li key={index} className="border p-4 mb-4">
-                    {notification}
-                </li>
+                    <li key={index} className="border p-4 mb-4">
+                        {notification}
+                    </li>
                 ))}
             </ul>
         </div>
     );
-}
+};
 
 export default NotificationList;
