@@ -21,17 +21,21 @@ const ReservertionForm = () => {
         try {
             // 予約日をGoで対応できるフォーマットに変換
             // "YYYY-MM-DDTHH:MM" -> "YYYY-MM-DD HH:MM:SS"
-            const formattedDate = reservationDate.replace('T', ' ') + ":00"; 
+            const formattedDate = reservationDate.replace('T', ' ') + ':00';
 
             // サーバーにPOSTリクエストを送信
-            await axios.post(`${API_URL}/api/reservation`, {
-                reservation_date: formattedDate,
-                num_people: numPeople,
-                special_request: specialRequest,
-                status,
-            }, {
-                withCredentials: true,
-            });
+            await axios.post(
+                `${API_URL}/api/reservation`,
+                {
+                    reservation_date: formattedDate,
+                    num_people: numPeople,
+                    special_request: specialRequest,
+                    status,
+                },
+                {
+                    withCredentials: true,
+                }
+            );
             setMessage('予約が正常に作成されました');
         } catch (error) {
             setMessage('予約の作成に失敗しました');
@@ -42,7 +46,7 @@ const ReservertionForm = () => {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen">
             <h1 className="text-3xl font-bold mb-4">予約情報を作成</h1>
-        
+
             <input
                 className="border-2 border-gray-300 p-2 mb-4"
                 type="datetime-local"
@@ -64,18 +68,18 @@ const ReservertionForm = () => {
                 onChange={(e) => setSpecialRequest(e.target.value)}
                 placeholder="特別リクエスト"
             />
-        
+
             <button
                 className="bg-blue-500 text-white p-2 rounded"
                 onClick={handleSubmit}
             >
                 予約を作成
             </button>
-        
+
             {/* メッセージ表示 */}
             <div className="mt-4 text-lg">{message}</div>
         </div>
     );
-}
+};
 
 export default ReservertionForm;

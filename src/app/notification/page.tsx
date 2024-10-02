@@ -22,13 +22,12 @@ const NotificationListPage = () => {
 
     return (
         <>
-            <Header username={username ? username : ""} />
+            <Header username={username ? username : ''} />
             <main className="container mx-auto p-4">
-                <NotificationList /> 
+                <NotificationList />
             </main>
         </>
-        
     );
-}
+};
 
 export default NotificationListPage;

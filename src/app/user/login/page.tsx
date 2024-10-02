@@ -6,9 +6,7 @@ import LoginForm from '@/app/components/user/login-form';
  * @returns JSX
  */
 const LoginPage = () => {
-    return (
-        <LoginForm />
-    );
+    return <LoginForm />;
 };
 
 export default LoginPage;

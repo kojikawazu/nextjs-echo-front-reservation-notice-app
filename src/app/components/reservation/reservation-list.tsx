@@ -26,6 +26,7 @@ const ReservationList = () => {
     // コンポーネントがマウントされた時に予約情報を取得
     useEffect(() => {
         fetchReservations();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
@@ -44,6 +45,6 @@ const ReservationList = () => {
             </ul>
         </div>
     );
-}
+};
 
 export default ReservationList;

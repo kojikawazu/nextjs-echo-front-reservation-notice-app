@@ -22,13 +22,12 @@ const ReservationFormPage = () => {
 
     return (
         <>
-            <Header username={username ? username : ""} />
+            <Header username={username ? username : ''} />
             <main className="container mx-auto p-4">
                 <ReservertionForm />
             </main>
         </>
-        
     );
-}
+};
 
 export default ReservationFormPage;
