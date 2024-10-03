@@ -15,6 +15,7 @@ const NotificationList = () => {
     const wsRef = useRef<WebSocket | null>(null);
     // 再接続のためのタイマーを保持
     const reconnectInterval = useRef<NodeJS.Timeout | null>(null);
+    const [error, setError] = useState<string | null>(null);
 
     // WebSocketの初期化
     const initWebSocket = () => {
@@ -68,8 +69,10 @@ const NotificationList = () => {
             setNotifications(
                 pastNotifications.map((notification) => notification.message)
             );
+            setError(null);
         } catch (error) {
             console.error('Failed to fetch notifications:', error);
+            setError('通知情報の取得に失敗しました');
         }
     };
 
@@ -95,13 +98,17 @@ const NotificationList = () => {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen">
             <h1 className="text-3xl font-bold mb-4">通知リスト</h1>
-            <ul>
-                {notifications.map((notification, index) => (
-                    <li key={index} className="border p-4 mb-4">
-                        {notification}
-                    </li>
-                ))}
-            </ul>
+            {error ? (
+                <p className="text-red-500">{error}</p> // エラーメッセージを表示
+            ) : (
+                <ul>
+                    {notifications.map((notification, index) => (
+                        <li key={index} className="border p-4 mb-4">
+                            {notification}
+                        </li>
+                    ))}
+                </ul>
+            )}
         </div>
     );
 };
